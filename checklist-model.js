@@ -79,7 +79,7 @@ angular.module('checklist-model', [])
     terminal: true,
     scope: true,
     compile: function(tElement, tAttrs) {
-      if (tElement[0].tagName !== 'INPUT' || !tElement.attr('type', 'checkbox')) {
+      if (tElement[0].tagName !== 'INPUT' || tElement.attr('type') != 'checkbox') {
         throw 'checklist-model should be applied to `input[type="checkbox"]`.';
       }
 
@@ -89,6 +89,10 @@ angular.module('checklist-model', [])
 
       // exclude recursion
       tElement.removeAttr('checklist-model');
+      tElement.removeAttr('data-checklist-model');
+      tElement.removeAttr('x-checklist-model');
+      tElement.removeAttr('data:checklist:model');
+      tElement.removeAttr('checklist:model');
       
       // local scope var storing individual checkbox model
       tElement.attr('ng-model', 'checked');
